@@ -60,6 +60,12 @@ function runTests() {
       { input: "1", expected: 1 },
       { input: "1,5", expected: 6 },
       { input: "1\n2,3", expected: 6 },
+      { input: "//;\n1;2", expected: 3 },
+      { input: "//***\n1***2***3", expected: 6 },
+      { input: "1,-2,3", expectedError: "negative numbers not allowed: -2" },
+      { input: "1,-2,-3", expectedError: "negative numbers not allowed: -2,-3" },
+      { input: "//[***]\n1***2***3", expected: 6 },
+      { input: "//;\n1;\n2;3", expected: 6 },
   ];
 
   tests.forEach(({ input, expected, expectedError }, index) => {
