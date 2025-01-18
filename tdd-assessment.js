@@ -54,3 +54,33 @@ function add(numbers) {
 }
 
 // Test cases using TDD
+function runTests() {
+  const tests = [
+      { input: "", expected: 0 },
+      { input: "1", expected: 1 },
+      { input: "1,5", expected: 6 },
+      { input: "1\n2,3", expected: 6 },
+  ];
+
+  tests.forEach(({ input, expected, expectedError }, index) => {
+      try {
+          const result = add(input);
+          if (expectedError) {
+              console.error(`Test ${index + 1} failed: Expected error '${expectedError}', but got result '${result}'`);
+          } else if (result !== expected) {
+              console.error(`Test ${index + 1} failed: Expected ${expected}, but got ${result}`);
+          } else {
+              console.log(`Test ${index + 1} passed`);
+          }
+      } catch (error) {
+          if (expectedError && error.message === expectedError) {
+              console.log(`Test ${index + 1} passed`);
+          } else {
+              console.error(`Test ${index + 1} failed: ${error.message}`);
+          }
+      }
+  });
+}
+
+// Run tests
+runTests();
